@@ -12,6 +12,7 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useAuth } from "@clerk/clerk-react";
 
 const eventSchema = z.object({
   title: z.string().min(3, "O título deve ter no mínimo 3 caracteres"),
@@ -27,6 +28,7 @@ type EventFormData = z.infer<typeof eventSchema>;
 export default function EventForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const { getToken } = useAuth();
 
   const form = useForm<EventFormData>({
     resolver: zodResolver(eventSchema),
@@ -43,10 +45,14 @@ export default function EventForm() {
     setMessage("");
 
     try {
+      const token = await getToken();
+
       const response = await fetch("http://localhost:5000/api/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Adiciona o token ao cabeçalho para provar que o usuário está logado
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });
@@ -71,7 +77,6 @@ export default function EventForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/* Título */}
           <FormField
             control={form.control}
             name="title"
@@ -85,8 +90,6 @@ export default function EventForm() {
               </FormItem>
             )}
           />
-
-          {/* Descrição */}
           <FormField
             control={form.control}
             name="description"
@@ -100,8 +103,6 @@ export default function EventForm() {
               </FormItem>
             )}
           />
-
-          {/* Data */}
           <FormField
             control={form.control}
             name="date"
@@ -115,8 +116,6 @@ export default function EventForm() {
               </FormItem>
             )}
           />
-
-          {/* Localização */}
           <FormField
             control={form.control}
             name="location"

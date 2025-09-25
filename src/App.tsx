@@ -1,31 +1,56 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import EventPage from "@/pages/EventPage";
+import Header from "./components/Header";
+
+import {
+  SignedIn,
+  SignedOut,
+  SignIn,
+  SignUp,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Redireciona da raiz para /eventos */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
+    <>
+      <Header />
 
-        {/* Página de cadastro de eventos */}
-        <Route path="/home" element={<HomePage />} />
+      <main>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route
+            path="/sign-in/*"
+            element={<SignIn routing="path" path="/sign-in" />}
+          />
+          <Route
+            path="/sign-up/*"
+            element={<SignUp routing="path" path="/sign-up" />}
+          />
 
-        {/* Página de cadastro de eventos */}
-        <Route path="/eventos" element={<EventPage />} />
+          <Route
+            path="/eventos"
+            element={
+              <>
+                <SignedIn>
+                  <EventPage />
+                </SignedIn>
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              </>
+            }
+          />
 
-        {/* Caso a rota não exista */}
-        <Route
-          path="*"
-          element={<h1 className="text-center mt-10">Página não encontrada</h1>}
-        />
-      </Routes>
-    </Router>
+          <Route
+            path="*"
+            element={
+              <h1 className="text-center mt-10">Página não encontrada</h1>
+            }
+          />
+        </Routes>
+      </main>
+    </>
   );
 }
