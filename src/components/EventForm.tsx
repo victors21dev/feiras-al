@@ -14,6 +14,8 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useAuth } from "@clerk/clerk-react";
 
+const URL_BACK = import.meta.env.VITE_URL_BACKEND_API_EVENTS;
+
 const eventSchema = z.object({
   title: z.string().min(3, "O título deve ter no mínimo 3 caracteres"),
   description: z
@@ -47,7 +49,7 @@ export default function EventForm() {
     try {
       const token = await getToken();
 
-      const response = await fetch("http://localhost:5000/api/events", {
+      const response = await fetch(`${URL_BACK}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

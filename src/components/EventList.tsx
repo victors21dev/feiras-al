@@ -9,8 +9,9 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+const URL_BACK = import.meta.env.VITE_URL_BACKEND_API_EVENTS;
 
-const API_URL = "http://localhost:5000/api/events";
+const API_URL = `${URL_BACK}`;
 
 export default function EventList() {
   const [events, setEvents] = useState<IEvent[]>([]);
