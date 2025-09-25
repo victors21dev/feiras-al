@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# Feiras-AL Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend do projeto **Feiras-AL**, desenvolvido com **React**, **TypeScript**, **Vite**, **Tailwind CSS** e **shadcn**.  
+O sistema conta com **autenticação via Clerk** e integração direta com a API backend para gerenciar feiras e eventos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias utilizadas
 
-## React Compiler
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn](https://ui.shadcn.com/)
+- [Clerk](https://clerk.com/) - Autenticação
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Autenticação de usuários via Clerk
+- Proteção de rotas privadas
+- Integração com backend via REST API
+- Interface responsiva e moderna usando Tailwind CSS e shadcn
+- CRUD completo para gerenciamento de eventos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 💻 Como rodar o projeto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/victors21dev/feiras-al.git
+cd feiras-al
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Clone o repositório
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo .env na raiz do projeto:
+PUBLISHABLE_KEY=''
+VITE_CLERK_PUBLISHABLE_KEY=''
+VITE_URL_BACKEND_API_EVENTS=''
+
+Dica:
+A chave do Clerk pode ser encontrada no painel do Clerk.
+
+### 4. Rode o projeto localmente
+
+```bash
+npm run dev
+```
+
+O frontend estará disponível em:
+http://localhost:5173
+
+## 📡 Integração com o backend veja no link abaixo:
+
+https://github.com/victors21dev/feiras-al-backend
+
+### 🗺 Roadmap de melhorias
+
+Melhorias na UI/UX
+Upload de imagens de eventos
+Filtros avançados e paginação
+Testes unitários e de integração
+
+📝 Licença
+Este projeto é open-source, licenciado sob os termos da MIT License.
